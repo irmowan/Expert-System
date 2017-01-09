@@ -1,38 +1,57 @@
 [
 {
     "IF": ["Freeway"],
-    "THEN": ["Max=120", "Min=60"]
+    "THEN": {
+        "Max": 120,
+        "Min": 60
+    }
 }, 
 {
     "IF": ["Freeway", "Safety distance 100 meters"],
-    "THEN": ["Max=100"]
+    "THEN": {
+        "Max": 100
+    }
 }, 
 {
     "IF": ["Freeway", "Two lanes", "Left lane"],
-    "THEN": ["Min=100"]
+    "THEN": {
+        "Min": 100
+    }
 }, 
 {
     "IF": ["Freeway", "Three lanes", "Left lane"],
-    "THEN": ["Min=110"]
+    "THEN": {
+        "Min": 110
+    }
 }, 
 {
     "IF": ["Freeway", "Three lanes", "Middle lane"],
-    "THEN": ["Min=90"]
+    "THEN": {
+        "Min":90
+    }
 }, 
 {
     "IF": ["Freeway", "Three lanes", "Right lane"],
-    "THEN": ["Min=60"]
+    "THEN": {
+        "Min": 60
+    }
 }, 
 {
     "IF": ["Freeway", "Visibility 200 meters"],
-    "THEN": ["Max=60"]
+    "THEN": {
+        "Max": 60
+    }
 }, 
 {
     "IF": ["Freeway", "Visibility 100 meters"],
-    "THEN": ["Max=40"]
+    "THEN": {
+        "Max": 40
+    }
 }, 
 {
     "IF": ["Freeway", "Visibility 50 meters"],
-    "THEN": ["Max=20"]
+    "THEN": {
+        "Max": 20
+    }
 }
 ]
