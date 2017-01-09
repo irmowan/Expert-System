@@ -47,9 +47,10 @@ def test_one_case(rules, facts):
             if 'Min' in conclusions.keys():
                 # print('Min ' + str(conclusions['Min']))
                 Min = max(Min, conclusions['Min'])
+            if Max < Min:
+                Min = 0
     print('Max speed: ' + str(Max))
     print('Min speed: ' + str(Min))
-    print()
     return Max, Min
 
 if __name__ == "__main__":
@@ -62,3 +63,5 @@ if __name__ == "__main__":
         facts = case['Facts']
         conclusion = case['Conclusion']
         Max, Min = test_one_case(rules, facts)
+        print(conclusion)
+        print()
