@@ -22,13 +22,24 @@ def import_facts():
 
 def match_rule(facts, rule):
     for condition in rule['IF']:
-        if not(condition in facts):
+        if (condition not in facts):
             return False
     return True
 
 if __name__ == "__main__":
     rules = import_rules()
     facts = import_facts()
+    Max = 120
+    Min = 0
     for rule in rules:
-        print('IF: ' + str(rule['IF']))
-        print(match_rule(facts, rule))
+        if (match_rule(facts, rule)):
+            print('Match rule: ' + str(rule['IF']))
+            conclusions = rule['THEN']
+            if 'Max' in conclusions.keys():
+                print('Max ' + str(conclusions['Max']))
+                Max = min(Max, conclusions['Max'])
+            if 'Min' in conclusions.keys():
+                print('Min ' + str(conclusions['Min']))
+                Min = max(Min, conclusions['Min'])
+    print('Max speed: ' + str(Max))
+    print('Min speed: ' + str(Min))
