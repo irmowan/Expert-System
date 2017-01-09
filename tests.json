@@ -1,0 +1,49 @@
+[
+    {
+        "Facts": ["Freeway"],
+        "Conclusion": {
+            "Max": 120,
+            "Min": 60
+        }
+    },
+    {
+        "Facts": ["Freeway", "Two lanes", "Right lane"],
+        "Conclusion": {
+            "Max": 120,
+            "Min": 60
+        }
+    },
+    {
+        "Facts": ["Freeway", "Two lanes", "Left lane"],
+        "Conclusion": {
+            "Max": 120,
+            "Min": 100
+        }
+    },
+    {
+        "Facts": ["Freeway", "Three lanes", "Middle lane", "Safety distance 100 meters"],
+        "Conclusion": {
+            "Max": 100,
+            "Min": 90
+        }
+    },
+    {
+        "Facts": ["Freeway", "Two lanes"],
+        "Conclusion": {
+            "Max": 120,
+            "Min": 60
+        }
+    },
+    {
+        "Facts": ["Freeway", "Visibility 100 meters"],
+        "Conclusion":{
+            "Max": 40
+        }
+    },
+    {
+        "Facts": ["Freeway", "Visibility 100 meters", "Three lanes", "Right lane"],
+        "Conclusion": {
+            "Max": 40
+        }
+    }
+]
