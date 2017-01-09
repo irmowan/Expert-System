@@ -14,10 +14,14 @@ def import_rules():
 def import_facts():
     facts = {'Freeway', 'Three lanes',
              'Middle lane', 'Safety distance 100 meters'}
-    print('The facts are: ')
-    print(facts)
-    print()
     return facts
+
+
+def import_cases():
+    cases_file = 'tests.json'
+    with open(cases_file, 'r') as f:
+        cases = json.load(f)
+        return cases
 
 
 def match_rule(facts, rule):
@@ -26,20 +30,35 @@ def match_rule(facts, rule):
             return False
     return True
 
-if __name__ == "__main__":
-    rules = import_rules()
-    facts = import_facts()
+
+def test_one_case(rules, facts):
+    print('The facts are: ')
+    print(facts)
+
     Max = 120
     Min = 0
     for rule in rules:
         if (match_rule(facts, rule)):
-            print('Match rule: ' + str(rule['IF']))
+            print('Match rule: ' + str(rule['IF']) + str(rule['THEN']))
             conclusions = rule['THEN']
             if 'Max' in conclusions.keys():
-                print('Max ' + str(conclusions['Max']))
+                # print('Max ' + str(conclusions['Max']))
                 Max = min(Max, conclusions['Max'])
             if 'Min' in conclusions.keys():
-                print('Min ' + str(conclusions['Min']))
+                # print('Min ' + str(conclusions['Min']))
                 Min = max(Min, conclusions['Min'])
     print('Max speed: ' + str(Max))
     print('Min speed: ' + str(Min))
+    print()
+    return Max, Min
+
+if __name__ == "__main__":
+    rules = import_rules()
+    facts = import_facts()
+    test_one_case(rules, facts)
+
+    cases = import_cases()
+    for case in cases:
+        facts = case['Facts']
+        conclusion = case['Conclusion']
+        Max, Min = test_one_case(rules, facts)
