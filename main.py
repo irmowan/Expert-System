@@ -5,7 +5,7 @@ import json
 
 
 def import_rules():
-    rule_file = 'rules.json'
+    rule_file = 'rules/rules.json'
     with open(rule_file, 'r') as f:
         rules = json.load(f)
         return rules
@@ -18,7 +18,7 @@ def import_facts():
 
 
 def import_cases():
-    cases_file = 'tests.json'
+    cases_file = 'cases/tests.json'
     with open(cases_file, 'r') as f:
         cases = json.load(f)
         return cases
