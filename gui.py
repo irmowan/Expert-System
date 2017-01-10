@@ -3,6 +3,7 @@
 __author__ = 'irmo'
 
 import tkinter as tk
+import main as expert
 
 
 class Application(tk.Frame):
@@ -18,10 +19,12 @@ class Application(tk.Frame):
 
     def create_widgets(self, master):
         self.labelInput = tk.Label(self, text='路况参数')
-        self.checkbuttonSafeDistance = tk.Checkbutton(self, text='与前车距离100米')
-        self.lanes = 1
-        self.lane = 2
-        self.visibility = 3
+        self.safety = tk.BooleanVar()
+        self.lanes = tk.StringVar()
+        self.lane = tk.StringVar()
+        self.visibility = tk.StringVar()
+        self.checkbuttonSafeDistance = tk.Checkbutton(
+            self, text='与前车距离100米', variable=self.safety)
         self.radiobuttonNoneLanes = tk.Radiobutton(
             self, text='未知车道数', variable=self.lanes)
         self.radiobuttonTwoLanes = tk.Radiobutton(
@@ -45,6 +48,7 @@ class Application(tk.Frame):
             self, text='100m', variable=self.visibility, value='Visibility 100 meters')
         self.radiobutton200Visibility = tk.Radiobutton(
             self, text='200m', variable=self.visibility, value='Visibility 200 meters')
+        self.buttonRun = tk.Button(self, text='进行监控...', command=self.run)
         self.labelOutput = tk.Label(self, text='监控结论')
         self.labelMax = tk.Label(self, text='最高时速: ')
         self.labelMin = tk.Label(self, text='最低时速: ')
@@ -65,10 +69,30 @@ class Application(tk.Frame):
         self.radiobutton200Visibility.grid(column=2, row=4)
         self.radiobutton100Visibility.grid(column=3, row=4)
         self.radiobutton50Visibility.grid(column=4, row=4)
-        self.labelOutput.grid(column=0, row=5)
-        self.labelMax.grid(column=0, row=6)
-        self.labelMin.grid(column=0, row=7)
-        self.labelAdvice.grid(column=0, row=8)
+        self.buttonRun.grid(column=0, row=5)
+        self.labelOutput.grid(column=0, row=6)
+        self.labelMax.grid(column=0, row=7)
+        self.labelMin.grid(column=0, row=8)
+        self.labelAdvice.grid(column=0, row=9)
+
+    def get_facts(self):
+        facts = ['Freeway']
+        if self.safety.get():
+            facts.append('Safety distance 100 meters')
+        if self.lanes.get():
+            facts.append(self.lanes.get())
+        if self.lane.get():
+            facts.append(self.lane.get())
+        if self.visibility.get():
+            facts.append(self.visibility.get())
+        return facts
+
+    def run(self):
+        facts = self.get_facts()
+        rules = expert.import_rules()
+        Max, Min = expert.test_one_case(rules, facts)
+        self.labelMax['text'] = '最高时速: ' + str(Max) + 'km/h'
+        self.labelMin['text'] = '最低时速: ' + str(Min) + 'km/h'
 
 if __name__ == '__main__':
     app = Application()
