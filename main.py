@@ -47,7 +47,7 @@ def test_one_case(rules, facts):
             if 'Min' in conclusions.keys():
                 # print('Min ' + str(conclusions['Min']))
                 Min = max(Min, conclusions['Min'])
-            if Max < Min:
+            if Max <= Min:
                 Min = 0
     print('Max speed: ' + str(Max))
     print('Min speed: ' + str(Min))
