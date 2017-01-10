@@ -49,10 +49,12 @@ class Application(tk.Frame):
         self.radiobutton200Visibility = tk.Radiobutton(
             self, text='200m', variable=self.visibility, value='Visibility 200 meters')
         self.buttonRun = tk.Button(self, text='进行监控...', command=self.run)
-        self.labelOutput = tk.Label(self, text='监控结论')
-        self.labelMax = tk.Label(self, text='最高时速: ')
-        self.labelMin = tk.Label(self, text='最低时速: ')
-        self.labelAdvice = tk.Label(self)
+        self.labelOutput = tk.Label(self, text='监控结论', justify='left')
+        self.labelMax = tk.Label(
+            self, text='最高时速: ', anchor='w')
+        self.labelMin = tk.Label(
+            self, text='最低时速: ', anchor='w')
+        self.labelAdvice = tk.Label(self, anchor='w')
 
     def grid_widgets(self):
         self.labelInput.grid(column=0, row=0)
@@ -69,11 +71,11 @@ class Application(tk.Frame):
         self.radiobutton200Visibility.grid(column=2, row=4)
         self.radiobutton100Visibility.grid(column=3, row=4)
         self.radiobutton50Visibility.grid(column=4, row=4)
-        self.buttonRun.grid(column=0, row=5)
+        self.buttonRun.grid(column=0, row=5, pady=4)
         self.labelOutput.grid(column=0, row=6)
-        self.labelMax.grid(column=0, row=7)
-        self.labelMin.grid(column=0, row=8)
-        self.labelAdvice.grid(column=0, row=9)
+        self.labelMax.grid(column=0, row=7, columnspan=4)
+        self.labelMin.grid(column=0, row=8, columnspan=4)
+        self.labelAdvice.grid(column=0, row=9, columnspan=4)
 
     def get_facts(self):
         facts = ['Freeway']
@@ -90,11 +92,23 @@ class Application(tk.Frame):
     def run(self):
         facts = self.get_facts()
         rules = expert.import_rules()
-        Max, Min = expert.test_one_case(rules, facts)
+        Max, Min, Advice = expert.test_one_case(rules, facts)
         self.labelMax['text'] = '最高时速: ' + str(Max) + 'km/h'
         self.labelMin['text'] = '最低时速: ' + str(Min) + 'km/h'
+        print(self.labelMax['text'])
+        print(self.labelMin['text'])
+        self.labelAdvice['text'] = ''
+        if len(Advice) > 0:
+            t = ''
+            if 'Open lights' in Advice:
+                t += '开启各类警示灯 '
+            if 'Leave ASAP' in Advice:
+                t += '在最近的出口尽快驶离高速公路'
+            self.labelAdvice['text'] = '行驶建议: ' + t
+            print(self.labelAdvice['text'])
+        print()
 
 if __name__ == '__main__':
     app = Application()
-    app.master.title('高速公路交通监控专家系统')
+    app.master.title('高速公路行驶速度监控专家系统')
     app.mainloop()

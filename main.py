@@ -37,6 +37,7 @@ def test_one_case(rules, facts):
 
     Max = 120
     Min = 0
+    Advice = set()
     for rule in rules:
         if (match_rule(facts, rule)):
             print('Match rule: ' + str(rule['IF']) + str(rule['THEN']))
@@ -49,9 +50,9 @@ def test_one_case(rules, facts):
                 Min = max(Min, conclusions['Min'])
             if Max <= Min:
                 Min = 0
-    print('Max speed: ' + str(Max))
-    print('Min speed: ' + str(Min))
-    return Max, Min
+            if 'Advice' in conclusions.keys():
+                Advice = Advice | set(conclusions['Advice'])
+    return Max, Min, Advice
 
 if __name__ == "__main__":
     rules = import_rules()
@@ -62,6 +63,10 @@ if __name__ == "__main__":
     for case in cases:
         facts = case['Facts']
         conclusion = case['Conclusion']
-        Max, Min = test_one_case(rules, facts)
-        print(conclusion)
+        Max, Min, Advice = test_one_case(rules, facts)
+        print('Max speed: ' + str(Max))
+        print('Min speed: ' + str(Min))
+        if len(Advice) > 0:
+            print('Advice: ' + str(Advice))
+        # print(conclusion)
         print()
