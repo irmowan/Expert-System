@@ -39,19 +39,22 @@
 {
     "IF": ["Freeway", "Visibility 200 meters"],
     "THEN": {
-        "Max": 60
+        "Max": 60,
+        "Advice": ["Open lights"]
     }
 }, 
 {
     "IF": ["Freeway", "Visibility 100 meters"],
     "THEN": {
-        "Max": 40
+        "Max": 40,
+        "Advice": ["Open lights"]
     }
 }, 
 {
     "IF": ["Freeway", "Visibility 50 meters"],
     "THEN": {
-        "Max": 20
+        "Max": 20,
+        "Advice": ["Open lights", "Leave ASAP"]
     }
 }
 ]

@@ -63,5 +63,11 @@
         "Conclusion": {
             "Max": 40
         }
+    },
+    {
+        "Facts": ["Freeway", "Three lanes", "Right lane", "Visibility 200 meters"],
+        "Conclusion": {
+            "Max": 60
+        }
     }
 ]
