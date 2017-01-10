@@ -45,5 +45,23 @@
         "Conclusion": {
             "Max": 40
         }
+    },
+    {
+        "Facts": ["Freeway", "Visibility 200 meters", "Two lanes", "Left lane"],
+        "Conclusion": {
+            "Max": 60
+        }
+    },
+    {
+        "Facts": ["Freeway", "Visibility 50 meters", "Three lanes", "Middle lane", "Safety distance 100 meters"],
+        "Conclusion": {
+            "Max": 20
+        }
+    },
+    {
+        "Facts": ["Freeway", "Visibility 100 meters", "Two lanes", "Right lane", "Safety distance 100 meters"],
+        "Conclusion": {
+            "Max": 40
+        }
     }
 ]
